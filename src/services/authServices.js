@@ -1,0 +1,39 @@
+// services/authService.js
+
+import { auth } from '../utils/firebaseConfig';
+import { signOut } from 'firebase/auth';
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth';
+
+export const handleLogout = async () => {
+  try {
+    await signOut(auth);
+    return { success: true };
+  } catch (error) {
+    console.error('Error signing out: ', error);
+    return { success: false, error };
+  }
+};
+
+export const loginWithGoogle = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    return result;
+  } catch (error) {
+    console.error('Google login error:', error.message);
+    throw error;
+  }
+};
+
+export const handleLogin = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    console.error('Email login error:', error.message);
+    throw error;
+  }
+};

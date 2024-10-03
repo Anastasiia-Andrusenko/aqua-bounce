@@ -6,6 +6,7 @@ import { Sky, Text3D } from '@react-three/drei';
 import { Physics } from '@react-three/cannon';
 import font from '../../font/helvetiker_bold.typeface.json';
 import Scene from '../Scene';
+import AuthPanel from 'components/AuthPanel/AuthPanel';
 const Ocean = React.lazy(() => import('../Ocean/Ocean'));
 
 const AnimatedText = () => {
@@ -60,6 +61,7 @@ const Preload = ({ handleStartBtnClick }) => {
           <div className={css.btnWrapper}>
             <Button text={'Lets go!'} onClick={handleStartBtnClick} />
           </div>
+          <AuthPanel />
         </div>
       </div>
     </>
