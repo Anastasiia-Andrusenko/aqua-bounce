@@ -1,0 +1,33 @@
+.overlay {
+  position: absolute;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  text-transform: uppercase;
+  font-weight: 900;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+}
+
+.shark {
+  width: 600px;
+  height: 600px;
+  background-image: url('../../imgs/shark-13521_512.gif');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.text {
+  font-family: 'Sixtyfour Convergence', sans-serif;
+  font-size: 80px;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: 'BLED' 0, 'SCAN' 32, 'XELA' -70, 'YELA' 51;
+}
