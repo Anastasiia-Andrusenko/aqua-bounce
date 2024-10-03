@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkaqua_bounce=self.webpackChunkaqua_bounce||[]).push([[684],{684:(a,e,s)=>{s.r(e),s.d(e,{default:()=>_});const l="PausedOverlay_overlay__xElPj",c="PausedOverlay_shark__rUbh4",r="PausedOverlay_text__bZ2w7";var u=s(723);const _=()=>(0,u.jsxs)("div",{className:l,children:[(0,u.jsx)("p",{className:r,children:"Take a rest"}),(0,u.jsx)("div",{className:c})]})}}]);
+//# sourceMappingURL=684.a54998bd.chunk.js.map
