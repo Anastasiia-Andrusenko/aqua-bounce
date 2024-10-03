@@ -10,7 +10,7 @@ export const App = () => {
         color: '#010101',
       }}
     >
-      React template for Game
+      React template for 3D Game
     </div>
   );
 };
