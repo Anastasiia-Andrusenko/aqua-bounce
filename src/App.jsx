@@ -1,10 +1,12 @@
 import { Sky } from '@react-three/drei';
-import React, { Suspense, useRef, useState } from 'react';
+import './App.css';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
 import { Physics } from '@react-three/cannon';
 import LoaderOverlay from './components/Loader/Loader';
 import Button from './components/Button/Button';
+import Timer from 'components/Timer/Timer';
 
 const PlayPlatform = React.lazy(() =>
   import('./components/PlayPlatform/PlayPlatform')
@@ -42,9 +44,30 @@ function MovingBlock({ offset = 0, position: [x, y, z], v, ...props }) {
 
 export const App = () => {
   const [key, setKey] = useState(0);
-  const [balls, setBalls] = useState([0]);
+
   const [paused, setPaused] = useState(false);
   const [isPreload, setIsPreload] = useState(true);
+  const [timer, setTimer] = useState(5);
+  const [showTimer, setShowTimer] = useState(false);
+  // const [ballSum, setBallSum] = useState(0);
+  const [balls, setBalls] = useState([0]);
+
+  // Старт таймера після зникнення preload
+  useEffect(() => {
+    if (!isPreload) {
+      setShowTimer(true);
+      const interval = setInterval(() => {
+        setTimer(prev => {
+          if (prev === 0) {
+            clearInterval(interval);
+            setShowTimer(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+  }, [isPreload]);
 
   const resetBall = () => {
     const newBallKey = key + 1;
@@ -58,12 +81,13 @@ export const App = () => {
   };
 
   return (
-    <>
+    <div className="page">
       <Suspense fallback={<LoaderOverlay />}>
         {isPreload ? (
           <Preload handleStartBtnClick={handleStartBtn} />
         ) : (
           <>
+            {showTimer && <Timer timer={timer} />}
             <Button
               onClick={() => setPaused(!paused)}
               text={paused ? 'Resume' : 'Pause'}
@@ -77,9 +101,12 @@ export const App = () => {
             >
               <Physics iterations={5} gravity={[0, -30, 0]} isPaused={paused}>
                 <Scene>
-                  {balls.map(ball => (
-                    <Ball key={ball} onReset={resetBall} />
-                  ))}
+                  {!showTimer &&
+                    balls.map((ball, index) => (
+                      <React.Fragment key={index}>
+                        {<Ball onReset={resetBall} />}
+                      </React.Fragment>
+                    ))}
                   <PlayPlatform />
                   {Array.from({ length: 4 }, (_, i) => (
                     <MovingBlock
@@ -118,6 +145,6 @@ export const App = () => {
           </>
         )}
       </Suspense>
-    </>
+    </div>
   );
 };

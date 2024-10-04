@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import Platform from '../Platform/Platform';
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
@@ -15,8 +16,36 @@ const PlayPlatform = () => {
     api.current.rotation.set(tiltX, tiltY, tiltZ);
   });
 
+  // Функція для створення половини циліндра
+  const HalfCylinder = () => {
+    const geometry = new THREE.CylinderGeometry(
+      40,
+      40,
+      60,
+      128,
+      1,
+      false,
+      0,
+      Math.PI
+    );
+    geometry.rotateY(Math.PI / 2);
+    return (
+      <mesh geometry={geometry}>
+        <meshPhysicalMaterial
+          transmission={0.99}
+          roughness={0}
+          thickness={0}
+          envMapIntensity={4}
+          color="rgba(199, 21, 133, 0.1)"
+          side={THREE.DoubleSide}
+        />
+      </mesh>
+    );
+  };
+
   return (
     <>
+      <HalfCylinder />
       <Platform ref={api} material={{ restitution: 1.3 }} color={0xc71585} />
     </>
   );

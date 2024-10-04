@@ -46,15 +46,14 @@ const AuthPanel = () => {
       <div className={css.container}>
         {isLoggedIn ? (
           <>
-            <p>Hello! Are you ready to play?</p>
-            <button type="button" onClick={handleLogout}>
+            <h2 className={css.title}>Hello! Are you ready to play?</h2>
+            <button type="button" onClick={handleLogout} className={css.button}>
               Log out
             </button>
           </>
         ) : (
-          <>
-            <h2 className={css.please}>Please log in to access all features</h2>
-            <div className={css.overlay}></div>
+          <div className={css.formWrapper}>
+            <h2 className={css.title}>Please log in to access all features</h2>
             <div className={css.form}>
               <AuthForm
                 title=""
@@ -62,14 +61,9 @@ const AuthPanel = () => {
                 onSubmit={onHandleLogin}
                 showNickname={false}
               />
-              <div>
-                <AuthButton
-                  onClick={onLoginWithGoogle}
-                  text="Log in with Google"
-                />
-              </div>
             </div>
-          </>
+            <AuthButton onClick={onLoginWithGoogle} text="Log in with Google" />
+          </div>
         )}
       </div>
     </>

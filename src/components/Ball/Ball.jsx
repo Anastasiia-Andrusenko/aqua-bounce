@@ -13,7 +13,7 @@ const Ball = ({ args = [1, 64, 64], v = new THREE.Vector3(), onReset }) => {
     args: [1],
     mass: 1,
     material: { restitution: 0.95 },
-    position: [10, 40, 0],
+    position: [Math.random() * 20 - 10, 40, 0],
   }));
 
   useEffect(() => {

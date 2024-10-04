@@ -2,7 +2,7 @@
 // AuthForm.jsx
 //
 import React, { useState } from 'react';
-import css from './AuthPanel.module.css';
+import css from './AuthForm.module.css';
 import { BsFillUnlockFill, BsLock } from 'react-icons/bs';
 
 const AuthForm = ({ title, buttonText, onSubmit, showNickname = false }) => {
@@ -42,41 +42,29 @@ const AuthForm = ({ title, buttonText, onSubmit, showNickname = false }) => {
           <label htmlFor="password" className={css.label}>
             Password:
           </label>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Password"
-            id="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-            className={css.input}
-          />
-          <button
-            type="button"
-            className={css.showPasswordBtn}
-            onClick={toggleShowPassword}
-          >
-            {showPassword ? (
-              <BsFillUnlockFill className={css.icon} />
-            ) : (
-              <BsLock className={css.icon} />
-            )}
-          </button>
+          <>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              id="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+              className={`${css.input} ${css.inputPass}`}
+            />
+            <button
+              type="button"
+              className={css.showPasswordBtn}
+              onClick={toggleShowPassword}
+            >
+              {showPassword ? (
+                <BsFillUnlockFill className={css.icon} />
+              ) : (
+                <BsLock className={css.icon} />
+              )}
+            </button>
+          </>
         </div>
-        {/* <div className={css.inputGroup}>
-          <label htmlFor="nickname" className={css.label}>
-            Nickname:
-          </label>
-          <input
-            type="text"
-            placeholder="Nickname"
-            id="nickname"
-            value={nickname}
-            onChange={e => setNickname(e.target.value)}
-            required
-            className={css.input}
-          />
-        </div> */}
         <button type="submit" className={css.button}>
           {buttonText}
         </button>

@@ -1,12 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Button from '../Button/Button';
 import css from './Preload.module.css';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Sky, Text3D } from '@react-three/drei';
 import { Physics } from '@react-three/cannon';
-import font from '../../font/helvetiker_bold.typeface.json';
+import font from '../../font/Patrick Hand_Regular.json';
 import Scene from '../Scene';
 import AuthPanel from 'components/AuthPanel/AuthPanel';
+import { auth } from 'utils/firebaseConfig';
+import { onAuthStateChanged } from 'firebase/auth';
+
 const Ocean = React.lazy(() => import('../Ocean/Ocean'));
 
 const AnimatedText = () => {
@@ -22,13 +25,13 @@ const AnimatedText = () => {
       ref={textRef}
       font={font}
       size={4}
-      height={1}
-      curveSegments={40}
+      height={0.1}
+      curveSegments={10}
       bevelEnabled
-      bevelThickness={0.1}
-      bevelSize={0.01}
-      bevelSegments={20}
-      position={[-17, -0.2, -10]}
+      bevelThickness={0.6}
+      bevelSize={0.3}
+      bevelSegments={10}
+      position={[-13, -0.2, -10]}
       rotation={[-Math.PI / 2.3, 0, 0]}
       material-toneMapped={true}
     >
@@ -39,32 +42,46 @@ const AnimatedText = () => {
 };
 
 const Preload = ({ handleStartBtnClick }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
-    <>
-      <div className={css.container}>
-        <Canvas dpr={1.5} camera={{ position: [0, 20, 2], fov: 100 }}>
-          <Physics>
-            <Scene>
-              <AnimatedText />
-              <Sky
-                distance={500000}
-                sunPosition={[0, 50, 100]}
-                inclination={0}
-                azimuth={0.25}
-              />
-              <Ocean />
-            </Scene>
-          </Physics>
-        </Canvas>
-        <div className={css.wrapper}>
-          <p className={css.text}>Keep the ball in play as long as possible!</p>
+    <div className={css.container}>
+      <Canvas dpr={1.5} camera={{ position: [0, 20, 0], fov: 100 }}>
+        <Physics>
+          <Scene>
+            <AnimatedText />
+            <Sky
+              distance={500000}
+              sunPosition={[0, 50, 100]}
+              inclination={0}
+              azimuth={0.25}
+            />
+            <Ocean />
+          </Scene>
+        </Physics>
+      </Canvas>
+      <div className={css.wrapper}>
+        <p className={css.text}>Keep the ball in play as long as possible!</p>
+        <AuthPanel />
+        {isLoggedIn && (
           <div className={css.btnWrapper}>
             <Button text={'Lets go!'} onClick={handleStartBtnClick} />
           </div>
-          <AuthPanel />
-        </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
