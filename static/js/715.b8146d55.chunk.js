@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkaqua_bounce=self.webpackChunkaqua_bounce||[]).push([[715],{715:(e,n,t)=>{t.r(n),t.d(n,{default:()=>a});t(483);var i=t(195),s=t(723);const a=e=>{let{children:n}=e;return(0,s.jsxs)(s.Fragment,{children:[(0,s.jsx)("ambientLight",{intensity:.5}),(0,s.jsx)("directionalLight",{position:[0,5,5],intensity:1}),(0,s.jsx)(i.N,{}),n]})}}}]);
-//# sourceMappingURL=715.b8146d55.chunk.js.map
