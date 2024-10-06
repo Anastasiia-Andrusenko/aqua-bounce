@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/aqua-bounce/static/css/main.9f7ad3ff.css",
-    "main.js": "/aqua-bounce/static/js/main.d359ad8f.js",
+    "main.css": "/aqua-bounce/static/css/main.0248eee4.css",
+    "main.js": "/aqua-bounce/static/js/main.2bd64c65.js",
     "static/js/810.e83d77e5.chunk.js": "/aqua-bounce/static/js/810.e83d77e5.chunk.js",
-    "static/js/715.e2bc9200.chunk.js": "/aqua-bounce/static/js/715.e2bc9200.chunk.js",
+    "static/js/715.ebbb0a77.chunk.js": "/aqua-bounce/static/js/715.ebbb0a77.chunk.js",
     "static/js/603.96d56547.chunk.js": "/aqua-bounce/static/js/603.96d56547.chunk.js",
     "static/js/453.bbea6329.chunk.js": "/aqua-bounce/static/js/453.bbea6329.chunk.js",
-    "static/css/682.8d5475ce.chunk.css": "/aqua-bounce/static/css/682.8d5475ce.chunk.css",
-    "static/js/682.8b7688ad.chunk.js": "/aqua-bounce/static/js/682.8b7688ad.chunk.js",
-    "static/css/684.334dede5.chunk.css": "/aqua-bounce/static/css/684.334dede5.chunk.css",
+    "static/css/682.a50da02d.chunk.css": "/aqua-bounce/static/css/682.a50da02d.chunk.css",
+    "static/js/682.b373d6f5.chunk.js": "/aqua-bounce/static/js/682.b373d6f5.chunk.js",
+    "static/css/684.2fd6681b.chunk.css": "/aqua-bounce/static/css/684.2fd6681b.chunk.css",
     "static/js/684.1d067090.chunk.js": "/aqua-bounce/static/js/684.1d067090.chunk.js",
     "static/js/195.61b5997e.chunk.js": "/aqua-bounce/static/js/195.61b5997e.chunk.js",
     "static/js/821.c306162f.chunk.js": "/aqua-bounce/static/js/821.c306162f.chunk.js",
@@ -18,21 +18,21 @@
     "static/media/ping.mp3": "/aqua-bounce/static/media/ping.a0246f136b97c52e7acf.mp3",
     "static/media/plop.mp3": "/aqua-bounce/static/media/plop.9cb7ad13460051e22d5b.mp3",
     "index.html": "/aqua-bounce/index.html",
-    "main.9f7ad3ff.css.map": "/aqua-bounce/static/css/main.9f7ad3ff.css.map",
-    "main.d359ad8f.js.map": "/aqua-bounce/static/js/main.d359ad8f.js.map",
+    "main.0248eee4.css.map": "/aqua-bounce/static/css/main.0248eee4.css.map",
+    "main.2bd64c65.js.map": "/aqua-bounce/static/js/main.2bd64c65.js.map",
     "810.e83d77e5.chunk.js.map": "/aqua-bounce/static/js/810.e83d77e5.chunk.js.map",
-    "715.e2bc9200.chunk.js.map": "/aqua-bounce/static/js/715.e2bc9200.chunk.js.map",
+    "715.ebbb0a77.chunk.js.map": "/aqua-bounce/static/js/715.ebbb0a77.chunk.js.map",
     "603.96d56547.chunk.js.map": "/aqua-bounce/static/js/603.96d56547.chunk.js.map",
     "453.bbea6329.chunk.js.map": "/aqua-bounce/static/js/453.bbea6329.chunk.js.map",
-    "682.8d5475ce.chunk.css.map": "/aqua-bounce/static/css/682.8d5475ce.chunk.css.map",
-    "682.8b7688ad.chunk.js.map": "/aqua-bounce/static/js/682.8b7688ad.chunk.js.map",
-    "684.334dede5.chunk.css.map": "/aqua-bounce/static/css/684.334dede5.chunk.css.map",
+    "682.a50da02d.chunk.css.map": "/aqua-bounce/static/css/682.a50da02d.chunk.css.map",
+    "682.b373d6f5.chunk.js.map": "/aqua-bounce/static/js/682.b373d6f5.chunk.js.map",
+    "684.2fd6681b.chunk.css.map": "/aqua-bounce/static/css/684.2fd6681b.chunk.css.map",
     "684.1d067090.chunk.js.map": "/aqua-bounce/static/js/684.1d067090.chunk.js.map",
     "195.61b5997e.chunk.js.map": "/aqua-bounce/static/js/195.61b5997e.chunk.js.map",
     "821.c306162f.chunk.js.map": "/aqua-bounce/static/js/821.c306162f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9f7ad3ff.css",
-    "static/js/main.d359ad8f.js"
+    "static/css/main.0248eee4.css",
+    "static/js/main.2bd64c65.js"
   ]
 }
