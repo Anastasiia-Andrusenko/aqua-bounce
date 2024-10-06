@@ -1,13 +1,28 @@
 import { Sky } from '@react-three/drei';
 import './App.css';
-import React, { Suspense, useEffect, useRef, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { Suspense, useEffect, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
 import { Physics } from '@react-three/cannon';
 import LoaderOverlay from './components/Loader/Loader';
 import Button from './components/Button/Button';
 import Timer from 'components/Timer/Timer';
+import Header from 'components/Header/Header';
+import MovingBlock from 'components/MovingBlock/MovingBlock';
+import { useDispatch, useSelector } from 'react-redux';
+import NewGame from './components/NewGame/NewGame';
+import {
+  gameTimerClock,
+  resetTimer,
+  setShowTimer,
+  setTimer,
+  gameTimePaused,
+} from './redux/slices/gameSlice';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { v4 as uuidv4 } from 'uuid';
 
+// --------------------------------------- I M P O R T S
 const PlayPlatform = React.lazy(() =>
   import('./components/PlayPlatform/PlayPlatform')
 );
@@ -20,64 +35,64 @@ const PausedOverlay = React.lazy(() =>
   import('./components/PausedOverlay/PausedOverlay')
 );
 
-function MovingBlock({ offset = 0, position: [x, y, z], v, ...props }) {
-  const api = useRef();
-  useFrame(state =>
-    api.current.position.set(
-      x +
-        (Math.sin(offset + state.clock.elapsedTime * v) *
-          state.viewport.width) /
-          10,
-      y,
-      z
-    )
-  );
-  return (
-    <Platform
-      ref={api}
-      args={[4, 1.5, 4]}
-      material={{ restitution: 1 }}
-      {...props}
-    />
-  );
-}
-
 export const App = () => {
-  const [key, setKey] = useState(0);
-
-  const [paused, setPaused] = useState(false);
+  const dispatch = useDispatch();
   const [isPreload, setIsPreload] = useState(true);
-  const [timer, setTimer] = useState(5);
-  const [showTimer, setShowTimer] = useState(false);
-  // const [ballSum, setBallSum] = useState(0);
   const [balls, setBalls] = useState([0]);
+  const life = useSelector(state => state.user.life);
+  const { timer, showTimer, isPaused, isStopGame } = useSelector(
+    state => state.game
+  );
 
-  // Старт таймера після зникнення preload
+  // відслідковуємо обратний таймер для запуска гри
   useEffect(() => {
     if (!isPreload) {
-      setShowTimer(true);
+      dispatch(setShowTimer(true));
       const interval = setInterval(() => {
-        setTimer(prev => {
-          if (prev === 0) {
-            clearInterval(interval);
-            setShowTimer(false);
-            return 0;
-          }
-          return prev - 1;
-        });
+        dispatch(setTimer());
       }, 1000);
+      return () => clearInterval(interval);
     }
-  }, [isPreload]);
+  }, [isPreload, dispatch]);
+
+  // запускаємо "часи" рахуємо час у грі
+  useEffect(() => {
+    if (timer <= 0 && !isPaused && life > 0) {
+      const clockInterval = setInterval(() => {
+        dispatch(gameTimerClock());
+      }, 1000);
+      return () => clearInterval(clockInterval);
+    }
+  }, [dispatch, isPaused, life, timer]);
+
+  const handlePauseResume = () => {
+    dispatch(gameTimePaused());
+  };
 
   const resetBall = () => {
-    const newBallKey = key + 1;
-    setKey(newBallKey);
-    setBalls(prevBalls => [...prevBalls, newBallKey]);
+    if (life > 0) {
+      const newBallKey = { id: uuidv4() };
+      setBalls(prevBalls => [...prevBalls, newBallKey]);
+    }
   };
 
   // START GAME функція
   const handleStartBtn = () => {
     setIsPreload(false);
+    setBalls([{ id: uuidv4() }]);
+    dispatch(resetTimer());
+  };
+
+  // START таймер для гри
+  const handleResetTimer = () => {
+    setBalls([{ id: uuidv4() }]);
+    dispatch(resetTimer());
+  };
+
+  const isPhysicStop = () => {
+    if (isPaused || isStopGame) {
+      return true;
+    }
   };
 
   return (
@@ -87,24 +102,32 @@ export const App = () => {
           <Preload handleStartBtnClick={handleStartBtn} />
         ) : (
           <>
+            <Header />
             {showTimer && <Timer timer={timer} />}
-            <Button
-              onClick={() => setPaused(!paused)}
-              text={paused ? 'Resume' : 'Pause'}
-            />
-            {paused && <PausedOverlay />}
+            {!isStopGame && (
+              <Button
+                onClick={handlePauseResume}
+                text={isPaused ? 'Resume' : 'Pause'}
+              />
+            )}
+            <NewGame resetTimer={handleResetTimer} />
+            {isPaused && <PausedOverlay />}
             <Canvas
               dpr={1.5}
-              camera={{ position: [0, 10, 40], fov: 70 }}
-              frameloop={paused ? 'demand' : 'always'}
+              camera={{ position: [0, 25, 40], fov: 70 }}
+              frameloop={isPaused ? 'demand' : 'always'}
               style={{ background: '0x87CEEB' }}
             >
-              <Physics iterations={5} gravity={[0, -30, 0]} isPaused={paused}>
+              <Physics
+                iterations={5}
+                gravity={[0, -30, 0]}
+                isPaused={isPhysicStop()}
+              >
                 <Scene>
                   {!showTimer &&
-                    balls.map((ball, index) => (
-                      <React.Fragment key={index}>
-                        {<Ball onReset={resetBall} />}
+                    balls.map(ball => (
+                      <React.Fragment key={ball.id}>
+                        {<Ball onReset={resetBall} ballId={ball.id} />}
                       </React.Fragment>
                     ))}
                   <PlayPlatform />
@@ -144,6 +167,7 @@ export const App = () => {
             </Canvas>
           </>
         )}
+        <ToastContainer />
       </Suspense>
     </div>
   );

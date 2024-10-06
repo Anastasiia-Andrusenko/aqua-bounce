@@ -1,5 +1,5 @@
 //
-// AuthContext.tsx
+// AuthContext.jsx
 //
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../utils/firebaseConfig';
@@ -43,17 +43,10 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
-  const updateDisplayName = displayName => {
-    if (currentUser) {
-      setCurrentUser({ ...currentUser, displayName });
-    }
-  };
-
   const value = {
     currentUser,
     isAuthenticated,
     logout,
-    updateDisplayName,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

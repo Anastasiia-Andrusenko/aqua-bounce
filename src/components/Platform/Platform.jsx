@@ -11,7 +11,7 @@ const Platform = forwardRef(
   (
     {
       shake = 0,
-      args = [6, 1.5, 4],
+      args = [6, 1.5, 6],
       color = 0xffff00,
       vec = new THREE.Vector3(),
       ...props

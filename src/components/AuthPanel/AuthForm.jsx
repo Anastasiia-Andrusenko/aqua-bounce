@@ -8,7 +8,6 @@ import { BsFillUnlockFill, BsLock } from 'react-icons/bs';
 const AuthForm = ({ title, buttonText, onSubmit, showNickname = false }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [nickname, setNickname] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = e => {

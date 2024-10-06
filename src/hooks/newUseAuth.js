@@ -8,7 +8,6 @@ const useAuthState = () => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       console.log('User state changed:', user);
       setIsLoggedIn(!!user);
-      console.log('isLoggedIn state:', !!user);
     });
 
     return () => {

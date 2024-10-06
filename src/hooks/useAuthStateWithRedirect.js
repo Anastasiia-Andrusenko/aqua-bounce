@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { auth } from '../utils/firebaseConfig';
+// import { useEffect, useState } from 'react';
+// import { useRouter } from 'next/router';
+// import { auth } from '../utils/firebaseConfig';
 
-const useAuthStateWithRedirect = () => {
-  const [nickname, setNickname] = useState(null);
-  const router = useRouter();
+// const useAuthStateWithRedirect = () => {
+//   const [nickname, setNickname] = useState(null);
+//   const router = useRouter();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        setNickname(user.displayName);
-      } else {
-        router.push('/login');
-      }
-    });
+//   useEffect(() => {
+//     const unsubscribe = auth.onAuthStateChanged(user => {
+//       if (user) {
+//         setNickname(user.displayName);
+//       } else {
+//         router.push('/login');
+//       }
+//     });
 
-    return () => unsubscribe();
-  }, [router]);
+//     return () => unsubscribe();
+//   }, [router]);
 
-  return nickname;
-};
+//   return nickname;
+// };
 
-export default useAuthStateWithRedirect;
+// export default useAuthStateWithRedirect;

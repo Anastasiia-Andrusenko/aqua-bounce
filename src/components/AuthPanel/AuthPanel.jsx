@@ -1,46 +1,114 @@
 import css from './AuthPanel.module.css';
-import React from 'react';
+import React, { useState } from 'react';
 import AuthForm from './AuthForm';
 import AuthButton from './AuthBtn';
-import useAuthState from 'hooks/useAuth';
+import useAuthState from '../../hooks/newUseAuth';
 import { toast } from 'react-toastify';
+import { loginWithGoogle, handleLogout } from 'services/authServices';
 import {
-  handleLogin,
-  loginWithGoogle,
-  handleLogout,
-} from 'services/authServices';
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { auth } from 'utils/firebaseConfig';
+import addUserToFirestore from 'services/addUserToFirestore';
+import { setUser } from '../../redux/slices/userSlice';
+import { useDispatch } from 'react-redux';
+import getUserDataFromFirestore from 'services/getUserData';
+// --------------------------------------- I M P O R T S
 
 const AuthPanel = () => {
-  // const [error, setError] = useState('');
-  // const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const isLoggedIn = useAuthState();
+  const dispatch = useDispatch();
 
+  // ------------------------------------ G O G L E __ L O G_I N
   const onLoginWithGoogle = async () => {
-    // setLoading(true);
     try {
       const result = await loginWithGoogle();
-      console.log(result.user); // Виведення інформації користувача
+      const user = result.user;
+      await addUserToFirestore(result.user);
+      const userData = await getUserDataFromFirestore(user.uid);
+      dispatch(
+        setUser({
+          email: user.email,
+          currentScore: 0,
+          bestScore: userData.bestScore,
+        })
+      );
+      toast.success('User logged in with Google successfully', {
+        position: 'top-left',
+        theme: 'colored',
+      });
     } catch (error) {
-      // setError(error.message);
-    } finally {
-      // setLoading(false);
+      setErrorMessage(error.message);
     }
   };
 
+  // ------------------------------------ H A N D L E __ L O G_I N
   const onHandleLogin = async (email, password) => {
-    // setLoading(true);
+    console.log('Attempting to log in with', email);
+
     try {
-      await handleLogin(email, password);
-      console.log(email);
-      toast.success('User logged in successfully');
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      const userData = await getUserDataFromFirestore(user.uid);
+
+      dispatch(
+        setUser({
+          email: user.email,
+          currentScore: 0,
+          bestScore: userData ? userData.bestScore : 0,
+        })
+      );
+
+      toast.success('User logged in successfully', {
+        position: 'top-left',
+        theme: 'colored',
+      });
     } catch (error) {
-      // setError(error.message);
-      toast.error(`Login failed: ${error}`);
-    } finally {
-      // setLoading(false);
+      setErrorMessage(error.message);
+
+      toast.error(`${errorMessage}`, {
+        position: 'top-left',
+        theme: 'colored',
+      });
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
+
+        await addUserToFirestore(user);
+        const userData = await getUserDataFromFirestore(user.uid);
+
+        dispatch(
+          setUser({
+            email: user.email,
+            currentScore: 0,
+            bestScore: userData ? userData.bestScore : 0,
+          })
+        );
+
+        toast.success('User logged in successfully', {
+          position: 'top-left',
+          theme: 'colored',
+        });
+      } catch (registrationError) {
+        setErrorMessage(registrationError.message);
+        toast.error('User register error', {
+          position: 'top-left',
+          theme: 'colored',
+        });
+      }
     }
   };
-
   return (
     <>
       <div className={css.container}>
@@ -69,5 +137,4 @@ const AuthPanel = () => {
     </>
   );
 };
-
 export default AuthPanel;

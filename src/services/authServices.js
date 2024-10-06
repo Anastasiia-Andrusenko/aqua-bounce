@@ -7,10 +7,13 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 export const handleLogout = async () => {
   try {
     await signOut(auth);
+    toast.warn('User logout', { position: 'top-left', theme: 'colored' });
+
     return { success: true };
   } catch (error) {
     console.error('Error signing out: ', error);
