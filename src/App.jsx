@@ -11,17 +11,20 @@ import Header from 'components/Header/Header';
 import MovingBlock from 'components/MovingBlock/MovingBlock';
 import { useDispatch, useSelector } from 'react-redux';
 import NewGame from './components/NewGame/NewGame';
+import css from './components/Header/Header.module.css';
 import {
   gameTimerClock,
   resetTimer,
   setShowTimer,
   setTimer,
   gameTimePaused,
+  stopStartGame,
+  resetGameTimerClock,
 } from './redux/slices/gameSlice';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { v4 as uuidv4 } from 'uuid';
-
+import GameSession from 'components/GameSessin/GameSession';
 // --------------------------------------- I M P O R T S
 const PlayPlatform = React.lazy(() =>
   import('./components/PlayPlatform/PlayPlatform')
@@ -65,6 +68,13 @@ export const App = () => {
     }
   }, [dispatch, isPaused, life, timer]);
 
+  // очищуємо масив мʼячів коли гра закінчена
+  useEffect(() => {
+    if (life <= 0) {
+      setBalls([0]);
+    }
+  }, [life]);
+
   const handlePauseResume = () => {
     dispatch(gameTimePaused());
   };
@@ -76,14 +86,24 @@ export const App = () => {
     }
   };
 
-  // START GAME функція
+  // ----- GAME STOP
+  const handleStopGame = () => {
+    dispatch(stopStartGame());
+    dispatch(resetGameTimerClock());
+    setBalls([0]);
+    if (isPaused) {
+      dispatch(gameTimePaused());
+    }
+  };
+
+  // ----- START GAME
   const handleStartBtn = () => {
     setIsPreload(false);
     setBalls([{ id: uuidv4() }]);
     dispatch(resetTimer());
   };
 
-  // START таймер для гри
+  //----- TIMER START
   const handleResetTimer = () => {
     setBalls([{ id: uuidv4() }]);
     dispatch(resetTimer());
@@ -165,6 +185,22 @@ export const App = () => {
                 rayleigh={0.7}
               />
             </Canvas>
+            <div className={css.btnWrapper}>
+              <Button
+                text={isStopGame ? 'START GAME' : 'STOP GAME'}
+                onClick={handleStopGame}
+              />
+            </div>
+            {(isStopGame || life <= 0) && (
+              <GameSession
+                title={life > 0 ? 'end game' : 'game over'}
+                text={
+                  life > 0
+                    ? 'But this is an opportunity to play again!'
+                    : 'However, this is an opportunity to play better!'
+                }
+              />
+            )}
           </>
         )}
         <ToastContainer />

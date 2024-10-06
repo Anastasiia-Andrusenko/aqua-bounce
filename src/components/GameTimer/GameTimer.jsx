@@ -8,16 +8,16 @@ const Timer = () => {
   const sec = clock.seconds;
 
   return (
-    <p className={css.container}>
-      <p className={css.timer}>
+    <div className={css.container}>
+      <div className={css.timer}>
         <p>
           <span className={css.number}>{min}</span>min
         </p>
         <p>
           <span className={css.number}>{sec}</span>sec
         </p>
-      </p>
-    </p>
+      </div>
+    </div>
   );
 };
 

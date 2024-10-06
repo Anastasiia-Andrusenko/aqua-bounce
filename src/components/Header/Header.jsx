@@ -6,24 +6,16 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from 'utils/firebaseConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import Timer from '../GameTimer/GameTimer';
-import {
-  resetCurrentScore,
-  resetGameTimerClock,
-  setCurrentScore,
-  stopStartGame,
-} from '../../redux/slices/gameSlice';
+import { setCurrentScore } from '../../redux/slices/gameSlice';
 import { toast } from 'react-toastify';
-import Button from 'components/Button/Button';
-import GameSession from 'components/GameSessin/GameSession';
 import { updateTopResult } from 'services/getTopResult';
 
 const Header = () => {
   const [bestResult, setBestResult] = useState(0);
   const [currentUser, setCurrentUser] = useState(null);
   const life = useSelector(state => state.user.life);
-  const { clock, currentScore, bounce, isStopGame } = useSelector(
-    state => state.game
-  );
+
+  const { clock, currentScore, bounce } = useSelector(state => state.game);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -88,12 +80,6 @@ const Header = () => {
     }
   };
 
-  const handleStopGame = () => {
-    dispatch(stopStartGame());
-    dispatch(resetGameTimerClock());
-    dispatch(resetCurrentScore());
-  };
-
   return (
     <>
       {currentUser && (
@@ -122,15 +108,8 @@ const Header = () => {
                   ))}
                 </ul>
               </div>
-              <div className={css.btnWrapper}>
-                <Button
-                  text={isStopGame ? 'START GAME' : 'STOP GAME'}
-                  onClick={handleStopGame}
-                />
-              </div>
             </div>
           </div>
-          {isStopGame && <GameSession score={bestResult} />}
         </>
       )}
     </>

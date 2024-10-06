@@ -76,7 +76,6 @@ export const {
   resetGameTimerClock,
   resetCurrentScore,
   stopStartGame,
-  isStopGame,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

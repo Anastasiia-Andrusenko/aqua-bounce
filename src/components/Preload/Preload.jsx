@@ -29,14 +29,23 @@ const AnimatedText = () => {
       curveSegments={10}
       bevelEnabled
       bevelThickness={0.6}
-      bevelSize={0.3}
+      bevelSize={0.4}
+      letterSpacing={0.3}
       bevelSegments={10}
-      position={[-13, -0.2, -10]}
+      position={[-14, -1, -10]}
       rotation={[-Math.PI / 2.3, 0, 0]}
       material-toneMapped={true}
     >
       Aqua Bounce
-      <meshPhysicalMaterial transmission={0} color={'#ffff00'} />
+      <meshPhysicalMaterial
+        transmission={0}
+        color={'#fbff00'}
+        roughness={0.3}
+        clearcoat={1}
+        emissive={'#ffbf00'}
+        reflectivity={1}
+        emissiveIntensity={0.5}
+      />
     </Text3D>
   );
 };
@@ -64,7 +73,7 @@ const Preload = ({ handleStartBtnClick }) => {
             <AnimatedText />
             <Sky
               distance={500000}
-              sunPosition={[0, 50, 100]}
+              sunPosition={[0, 800, 5000]}
               inclination={0}
               azimuth={0.25}
             />
