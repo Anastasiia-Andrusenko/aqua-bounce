@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/aqua-bounce/static/css/main.0248eee4.css",
-    "main.js": "/aqua-bounce/static/js/main.2bd64c65.js",
+    "main.css": "/aqua-bounce/static/css/main.b93540fa.css",
+    "main.js": "/aqua-bounce/static/js/main.779049ad.js",
     "static/js/810.e83d77e5.chunk.js": "/aqua-bounce/static/js/810.e83d77e5.chunk.js",
     "static/js/715.ebbb0a77.chunk.js": "/aqua-bounce/static/js/715.ebbb0a77.chunk.js",
     "static/js/603.96d56547.chunk.js": "/aqua-bounce/static/js/603.96d56547.chunk.js",
     "static/js/453.bbea6329.chunk.js": "/aqua-bounce/static/js/453.bbea6329.chunk.js",
-    "static/css/682.a50da02d.chunk.css": "/aqua-bounce/static/css/682.a50da02d.chunk.css",
+    "static/css/682.f771eab5.chunk.css": "/aqua-bounce/static/css/682.f771eab5.chunk.css",
     "static/js/682.b373d6f5.chunk.js": "/aqua-bounce/static/js/682.b373d6f5.chunk.js",
     "static/css/684.2fd6681b.chunk.css": "/aqua-bounce/static/css/684.2fd6681b.chunk.css",
     "static/js/684.1d067090.chunk.js": "/aqua-bounce/static/js/684.1d067090.chunk.js",
@@ -18,13 +18,13 @@
     "static/media/ping.mp3": "/aqua-bounce/static/media/ping.a0246f136b97c52e7acf.mp3",
     "static/media/plop.mp3": "/aqua-bounce/static/media/plop.9cb7ad13460051e22d5b.mp3",
     "index.html": "/aqua-bounce/index.html",
-    "main.0248eee4.css.map": "/aqua-bounce/static/css/main.0248eee4.css.map",
-    "main.2bd64c65.js.map": "/aqua-bounce/static/js/main.2bd64c65.js.map",
+    "main.b93540fa.css.map": "/aqua-bounce/static/css/main.b93540fa.css.map",
+    "main.779049ad.js.map": "/aqua-bounce/static/js/main.779049ad.js.map",
     "810.e83d77e5.chunk.js.map": "/aqua-bounce/static/js/810.e83d77e5.chunk.js.map",
     "715.ebbb0a77.chunk.js.map": "/aqua-bounce/static/js/715.ebbb0a77.chunk.js.map",
     "603.96d56547.chunk.js.map": "/aqua-bounce/static/js/603.96d56547.chunk.js.map",
     "453.bbea6329.chunk.js.map": "/aqua-bounce/static/js/453.bbea6329.chunk.js.map",
-    "682.a50da02d.chunk.css.map": "/aqua-bounce/static/css/682.a50da02d.chunk.css.map",
+    "682.f771eab5.chunk.css.map": "/aqua-bounce/static/css/682.f771eab5.chunk.css.map",
     "682.b373d6f5.chunk.js.map": "/aqua-bounce/static/js/682.b373d6f5.chunk.js.map",
     "684.2fd6681b.chunk.css.map": "/aqua-bounce/static/css/684.2fd6681b.chunk.css.map",
     "684.1d067090.chunk.js.map": "/aqua-bounce/static/js/684.1d067090.chunk.js.map",
@@ -32,7 +32,7 @@
     "821.c306162f.chunk.js.map": "/aqua-bounce/static/js/821.c306162f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0248eee4.css",
-    "static/js/main.2bd64c65.js"
+    "static/css/main.b93540fa.css",
+    "static/js/main.779049ad.js"
   ]
 }
