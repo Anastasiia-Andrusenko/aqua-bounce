@@ -86,7 +86,7 @@ const GameSession = ({ title, text }) => {
       {bestEverResult && (
         <p className={css.record}>
           <span className={css.email}>{bestEverResult.email}</span> has the best
-          result among all! <br /> His/her score is
+          result among players! <br /> His/her score is
           <span className={css.number}>{bestEverResult.bestResult}</span>
         </p>
       )}
