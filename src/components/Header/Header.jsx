@@ -99,7 +99,7 @@ const Header = () => {
                 </p>
               )}
               <div className={css.life_container}>
-                <span className={css.lifeCount}>{life}</span>
+                {/* <span className={css.lifeCount}>{life}</span> */}
                 <ul className={css.life_list}>
                   {Array.from({ length: life }, (_, index) => (
                     <li key={index} className={css.life_item}>
