@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/aqua-bounce/static/css/main.b93540fa.css",
-    "main.js": "/aqua-bounce/static/js/main.779049ad.js",
+    "main.css": "/aqua-bounce/static/css/main.8541a530.css",
+    "main.js": "/aqua-bounce/static/js/main.176ba77d.js",
     "static/js/810.e83d77e5.chunk.js": "/aqua-bounce/static/js/810.e83d77e5.chunk.js",
     "static/js/715.ebbb0a77.chunk.js": "/aqua-bounce/static/js/715.ebbb0a77.chunk.js",
     "static/js/603.96d56547.chunk.js": "/aqua-bounce/static/js/603.96d56547.chunk.js",
@@ -18,8 +18,8 @@
     "static/media/ping.mp3": "/aqua-bounce/static/media/ping.a0246f136b97c52e7acf.mp3",
     "static/media/plop.mp3": "/aqua-bounce/static/media/plop.9cb7ad13460051e22d5b.mp3",
     "index.html": "/aqua-bounce/index.html",
-    "main.b93540fa.css.map": "/aqua-bounce/static/css/main.b93540fa.css.map",
-    "main.779049ad.js.map": "/aqua-bounce/static/js/main.779049ad.js.map",
+    "main.8541a530.css.map": "/aqua-bounce/static/css/main.8541a530.css.map",
+    "main.176ba77d.js.map": "/aqua-bounce/static/js/main.176ba77d.js.map",
     "810.e83d77e5.chunk.js.map": "/aqua-bounce/static/js/810.e83d77e5.chunk.js.map",
     "715.ebbb0a77.chunk.js.map": "/aqua-bounce/static/js/715.ebbb0a77.chunk.js.map",
     "603.96d56547.chunk.js.map": "/aqua-bounce/static/js/603.96d56547.chunk.js.map",
@@ -32,7 +32,7 @@
     "821.c306162f.chunk.js.map": "/aqua-bounce/static/js/821.c306162f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b93540fa.css",
-    "static/js/main.779049ad.js"
+    "static/css/main.8541a530.css",
+    "static/js/main.176ba77d.js"
   ]
 }
